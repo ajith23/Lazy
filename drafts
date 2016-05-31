@@ -1,0 +1,40 @@
+users	
+- id
+- full name
+- email
+- password hash
+- active
+- verified
+- cover save path
+- cover save rule
+- resume save path
+- resume save rule
+
+user access
+- user id
+- access level (Cover, Resume)
+- access type (View, Download)
+- maximum versions
+
+covers
+- id
+- user id
+- version
+- template
+- fields in file name
+
+generated covers
+- id 
+- user id
+- version
+- file name
+- html text
+- pdffilebytes
+- generated date date
+
+logged in users
+- user id
+
+logs
+- id
+- log
