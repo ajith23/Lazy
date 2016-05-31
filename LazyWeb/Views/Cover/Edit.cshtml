@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+<script src="~/scripts/custom/cover.js"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        browser_spellcheck: true,
+        plugins: ['advlist autolink autoresize lists link image charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                    'insertdatetime media nonbreaking save table contextmenu directionality',
+                    'emoticons template paste textcolor colorpicker textpattern imagetools'],
+        toolbar: 'fontselect fontsizeselect | undo redo | styleselect | bold italic underline | link image alignleft aligncenter alignright | table',
+        toolbar1: 'fontselect fontsizeselect | undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar2: 'print preview media | forecolor backcolor emoticons',
+        image_advtab: true,
+        menubar: 'file edit insert view table tools',
+        content_css: [ '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                        '//www.tinymce.com/css/codepen.min.css']
+    });
+</script>
+
+Select your cover template version 
+<select id="coverVersionSelect">
+    <option value="0">--Create New--</option>
+    @foreach (var cover in ViewBag.TemplateList)
+    {
+        <option value="@cover.Id.ToString()">@cover.Version</option>
+    }
+
+</select>
+<br />
+<br />
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Version Name*</span>
+    <input id="currentVersionNameText" type="text" class="form-control" title="Be specific. This will be used as identification for this template." aria-describedby="basic-addon1">
+</div>
+
+<br />
+
+<textarea id="coverTemplate" title="coverTemplate"> test data </textarea>
