@@ -1,12 +1,14 @@
-﻿html {
+﻿* {margin:0;padding:0;}
+html {
   height: 100%;
   box-sizing: border-box;
 }
 
 body {
-    min-height: 100%;
-    position: relative;
+    height: 100%;
 }
+
+#wrapper {min-height: 100%;}
 
 .coverfieldEmpty
 {
@@ -14,12 +16,14 @@ body {
 }
 
 .footer {
-  position: absolute;
-  right: 0;
-  left: 0;
-  padding-top: 15px;
-  background-color: #efefef;
+  position: relative;
+  margin-top: -40px; /* negative value of footer height */
+  height: 40px;
+  clear:both;
+  background: #EFEFEF;
+  padding-top:10px;
 }
 
 .pageBody{
+    padding-bottom: 40px;
 }
