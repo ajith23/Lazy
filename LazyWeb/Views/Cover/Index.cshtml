@@ -3,4 +3,63 @@
     ViewBag.Title = "Cover";
 }
 <script src="~/scripts/custom/cover.js"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: ['print preview save autoresize'],
+        toolbar:  'print preview save',
+        menubar: '',
+        autoresize_min_height: 200,
+        content_css: [ '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                        '//www.tinymce.com/css/codepen.min.css']
+    });
+</script>
 
+<div class="row">
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Things you can do</div>
+            <div class="panel-body">
+                Select template
+                <select id="coverVersionSelect">
+                    @foreach (var cover in ViewBag.TemplateList)
+                    {
+                        <option value="@cover.Id.ToString()">@cover.Version</option>
+                    }
+                </select>
+                <br />
+                <br />
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" id="editTemplateButton" title="Edit selected template"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-default" id="createTemplateButton" title="Create new template"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Cover Fields</div>
+            <div class="panel-body">
+                <div id="fieldAreaDiv">
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading"> Cover Preview
+                <div style="float:right">
+                    <div class="btn-group-xs" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" title="Print cover"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-default" title="Save cover"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="coverTemplateDiv" title="coverTemplate"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ namespace LazyWeb.Controllers
         // GET: Cover
         public ActionResult Index()
         {
+            ViewBag.TemplateList = Cover.GetDummyData();
             return View();
         }
 
@@ -22,9 +23,16 @@ namespace LazyWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult FetchCoverTemplates(int id)
+        public JsonResult FetchCoverTemplate(int id)
         {
-            return Json("test");
+            var template = Cover.GetDummyData().Where(c => c.Id == id).FirstOrDefault();
+            if (template != null)
+            {
+                template.Template = Server.HtmlEncode(template.Template);
+                return Json(template, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 }
