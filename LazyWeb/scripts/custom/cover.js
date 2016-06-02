@@ -41,6 +41,10 @@
         }
         saveEditCoverTemplate($('#coverVersionSelect').val());
     });
+
+    $('#saveCoverButton').click(function () {
+        savePdf($('#coverVersionSelect').val());
+    });
 });
 
 function fetchCoverTemplates(id)
@@ -157,4 +161,24 @@ function saveEditCoverTemplate(id)
             handleAjaxError(xhr, error);
         }
     });
+}
+
+function savePdf(id) {
+    alert('in progress');
+    //var cover = htmlEncode($('#coverTemplateDiv').html());
+    //var url = getBaseUrl('cover', 'GeneratePDF');
+    //$.ajax({
+    //    type: "POST",
+    //    contentType: "application/json; charset=utf-8",
+    //    url: url,
+    //    data: JSON.stringify({cover: cover}),
+    //    //dataType: "json",
+    //    success: function (response) {
+    //        //alert(response);
+    //        var pdfWin = window.open("data:application/pdf;base64, " + response, '', 'height=650,width=840');
+    //    },
+    //    error: function (xhr, error) {
+    //        handleAjaxError(xhr, error);
+    //    }
+    //});
 }

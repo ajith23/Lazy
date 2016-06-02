@@ -66,6 +66,22 @@ namespace LazyWeb.Controllers
             }
         }
 
+        [HttpPost]
+        public FileStreamResult GeneratePDF(string cover)
+        {
+            try
+            {
+                var pdfStream = Utility.GeneratePDF(HttpUtility.HtmlDecode(cover));
+                return new FileStreamResult(pdfStream, "application/pdf");
+                //return Json("PDF generated and saved.", JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return new FileStreamResult(null, "application/pdf");
+                //return Json("Failed. Invalid ID passed.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         private Cover FetchCover(int id)
         {
             if (Session["CoverList"] != null)
