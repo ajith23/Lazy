@@ -90,7 +90,6 @@ function updateFields(decodedData)
     $('.coverField').keyup(function () {
         var spanId = $(this).attr('id').replace('TextBox', 'Span');
         $('.' + spanId).html($(this).val());
-
         if ($(this).val()) {
             $('.' + spanId).removeClass('coverfieldEmpty');
         }
@@ -100,6 +99,15 @@ function updateFields(decodedData)
         }
         //alert(spanId);
         //alert($(this).val());
+    });
+    $('.coverField').focusout(function () {
+        var spanId = $(this).attr('id').replace('TextBox', 'Span');
+        $('.' + spanId).removeClass('coverfieldHighlight');
+    });
+    $('.coverField').focusin(function () {
+        var spanId = $(this).attr('id').replace('TextBox', 'Span');
+        //alert(spanId);
+        $('.' + spanId).addClass('coverfieldHighlight');
     });
 }
 

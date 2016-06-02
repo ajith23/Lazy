@@ -15,6 +15,11 @@ body {
     color:red;
 }
 
+.coverfieldHighlight
+{
+    background: #FFFF00;
+}
+
 .footer {
   position: relative;
   margin-top: -40px; /* negative value of footer height */
