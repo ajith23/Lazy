@@ -140,11 +140,13 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\custom\site.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\custom\common.js" />
     <Content Include="scripts\custom\resume.js" />
     <Content Include="scripts\custom\cover.js" />
     <Content Include="scripts\custom\home.js" />

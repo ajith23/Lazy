@@ -10,7 +10,7 @@
         }
     }
     else
-        fetchCoverTemplates(1);
+        fetchCoverTemplates($('#coverVersionSelect').val());
     
     $('#coverVersionSelect').change(function() {
         if ($(this).val() === 0)
@@ -22,31 +22,44 @@
 
     $('#editTemplateButton').click(function () {
         var selectedTempelateId = $('#coverVersionSelect').val();
-        window.location.href = "/cover/edit?id=" + selectedTempelateId;
+        window.location.href = getBaseUrl('cover', 'edit') + '?id=' + selectedTempelateId;
     });
     $('#createTemplateButton').click(function () {
-        window.location.href = "/cover/edit?id=0";
+        window.location.href = getBaseUrl('cover', 'edit') + '?id=0';
     });
 
+    $('#cancelEditCoverButton').click(function () {
+        if (confirm("Are you sure you would like to cancel? All your unsaved data will be lost.")) {
+            window.location.href = getBaseUrl('cover', 'index');
+        }
+    });
+    $('#saveEditCoverButton').click(function () {
+        //validate form
+        if ($('#currentVersionNameText').val().trim() === '') {
+            alert('Ener a template version name. This is required so that you can identify your template using this name. Be very specific.');
+            return;
+        }
+        saveEditCoverTemplate($('#coverVersionSelect').val());
+    });
 });
 
 function fetchCoverTemplates(id)
 {
+    var url = getBaseUrl('cover', 'FetchCoverTemplate') + '?id=' + id;
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: "/cover/FetchCoverTemplate?id=" + id,
+        url: url,
         dataType: "json",
         success: function(response){
-            var decodedData = $("<div/>").html(response.Template).text();
+            var decodedData = htmlDecode(response.Template);
             if (window.location.pathname.toLowerCase().indexOf('edit') > -1)
                 tinymce.get('coverTemplate').getBody().innerHTML = decodedData;
             $('#coverTemplateDiv').html(decodedData);
             updateFields(decodedData);
         },
         error: function (xhr, err) {
-            alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
-            alert("responseText: " + xhr.responseText);
+            handleAjaxError(xhr, error);
         }
     });
 }
@@ -89,7 +102,6 @@ function updateFields(decodedData)
         //alert($(this).val());
     });
 }
-//var res = str.match(/{([^}]*)}/gi);
 
 function getFormGroupHtml(fieldName, plainName)
 {
@@ -117,3 +129,24 @@ function getUrlParameter(sParam) {
         }
     }
 };
+
+function saveEditCoverTemplate(id)
+{
+    var url = getBaseUrl('cover', 'SaveEditCoverTemplate') + '?id=' + id;
+    var versionName = $('#currentVersionNameText').val();
+    var template = htmlEncode(tinyMCE.get('coverTemplate').getContent());
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: id, version: versionName, template : template }),
+        url: url,
+        dataType: "json",
+        success: function (response) {
+            alert(response);
+            window.location.href = getBaseUrl('cover', 'index');
+        },
+        error: function (xhr, error) {
+            handleAjaxError(xhr, error);
+        }
+    });
+}

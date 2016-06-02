@@ -14,10 +14,35 @@
                         '//www.tinymce.com/css/codepen.min.css']
     });
 </script>
-
+<div class="row">
+    <div class="col-sm-12">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Select template</span>
+            <select id="coverVersionSelect" class="dropdown btn btn-default" style="border-radius: 0px; width: 100%; padding: 7px 12px;">
+                @foreach (var cover in ViewBag.TemplateList)
+                {
+                    if (cover.Id == ViewBag.LastEditedId)
+                    {
+                        <option value="@cover.Id.ToString()" selected="selected">@cover.Version</option>
+                    }
+                    else
+                    {
+                        <option value="@cover.Id.ToString()">@cover.Version</option>
+                    }
+                }
+            </select>
+            <span class="input-group-btn">
+                
+                <button type="button" class="btn btn-primary" id="editTemplateButton" title="Edit selected template"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button>
+                <button type="button" class="btn btn-success" id="createTemplateButton" title="Create new template"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</button>
+            </span>
+        </div>
+    </div>
+</div>
+<br />
 <div class="row">
     <div class="col-sm-3">
-        <div class="panel panel-default">
+        @*<div class="panel panel-default">
             <div class="panel-heading">Things you can do</div>
             <div class="panel-body">
                 Select template
@@ -34,7 +59,7 @@
                     <button type="button" class="btn btn-default" id="createTemplateButton" title="Create new template"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="panel panel-default">
             <div class="panel-heading">Cover Fields</div>
@@ -52,14 +77,15 @@
             <div class="panel-heading"> Cover Preview
                 <div style="float:right">
                     <div class="btn-group-xs" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default" title="Print cover"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-default" title="Save cover"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+                        <button id="printCoverButton" type="button" class="btn btn-default" title="Print cover"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></button>
+                        <button id="saveCoverButton" type="button" class="btn btn-default" title="Save cover"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
             <div class="panel-body">
                 <div id="coverTemplateDiv" title="coverTemplate"></div>
             </div>
+            <div id="editor"></div>
         </div>
     </div>
 </div>
