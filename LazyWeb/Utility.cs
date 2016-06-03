@@ -10,10 +10,12 @@ namespace LazyWeb
 {
     public class Utility
     {
+        public static string NoAuthMessage = "You are not Authenticated, or your session is expired.";
         public static string pageSize = "Letter";
         public static string pageOrientation = "Portrait";
         public static int pageMargin = 25;
         public static string downloadPath = @"C:\lazy-downloads\CoverSample.pdf";
+        public static string keyPath = @"C:\lazy-downloads\key.txt";
         public static byte[] GeneratePDF(string htmlString)
         {
             // instantiate a html to pdf converter object
@@ -42,6 +44,15 @@ namespace LazyWeb
             document.DocumentInformation.Keywords = "cover, profile";
             document.DocumentInformation.CreationDate = DateTime.Now;
             return document;
+        }
+
+        public static bool IsAuthenticated(string key)
+        {
+            var authenticated = false;
+            string currentKey = File.ReadAllText(keyPath);
+            if (currentKey.Equals(key))
+                authenticated = true;
+            return authenticated;
         }
     }
 }

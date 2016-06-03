@@ -7,4 +7,24 @@
         }
     });
     
+    $('#lazyLogoutLink').click(function () {
+        secureLogout();
+    });
+
 });
+
+function secureLogout() {
+    var url = getBaseUrl('login', 'SecureLogout');
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: url,
+        dataType: "json",
+        success: function (response) {
+            window.location.href = getBaseUrl('error', 'index') + '?error= You have been logged out.';
+        },
+        error: function (xhr, err) {
+            handleAjaxError(xhr, error);
+        }
+    });
+}

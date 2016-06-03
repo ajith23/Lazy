@@ -11,7 +11,19 @@ namespace LazyWeb.Controllers
         // GET: Resume
         public ActionResult Index()
         {
-            return View();
+            if (Utility.IsAuthenticated(Session["LazyKey"] == null ? string.Empty : Session["LazyKey"].ToString()))
+            {
+                return View();
+            }
+            else
+            {
+                return HandleNoAuth();
+            }
+        }
+
+        private ActionResult HandleNoAuth()
+        {
+            return RedirectToAction("Index", "Error", new { error = Utility.NoAuthMessage });
         }
     }
 }

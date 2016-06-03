@@ -13,73 +13,108 @@ namespace LazyWeb.Controllers
         // GET: Cover
         public ActionResult Index()
         {
-            UpdateViewBag();
-            return View();
+            if (Utility.IsAuthenticated(Session["LazyKey"]==null ? string.Empty: Session["LazyKey"].ToString()))
+            {
+                UpdateViewBag();
+                return View();
+            }
+            else
+            {
+                return HandleNoAuth();
+            }
         }
 
         public ActionResult Edit(int id)
         {
-            UpdateViewBag();
-            return View();
+            if (Utility.IsAuthenticated(Session["LazyKey"] == null ? string.Empty : Session["LazyKey"].ToString()))
+            {
+                UpdateViewBag();
+                return View();
+            }
+            else
+            {
+                return HandleNoAuth();
+            }
         }
 
         [HttpGet]
         public JsonResult FetchCoverTemplate(int id)
         {
-            var template = FetchCover(id);
-            if (template != null)
+            if (Utility.IsAuthenticated(Session["LazyKey"] == null ? string.Empty : Session["LazyKey"].ToString()))
             {
-                //template.Template = Server.HtmlEncode(template.Template);
-                return Json(template, JsonRequestBehavior.AllowGet);
+                var template = FetchCover(id);
+                if (template != null)
+                {
+                    //template.Template = Server.HtmlEncode(template.Template);
+                    return Json(template, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return Json("", JsonRequestBehavior.AllowGet);
             }
             else
-                return Json("", JsonRequestBehavior.AllowGet);
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]
         public JsonResult SaveEditCoverTemplate(string id, string version, string template)
         {
-            var coverId = 0;
-            if(int.TryParse(id, out coverId))
+            if (Utility.IsAuthenticated(Session["LazyKey"] == null ? string.Empty : Session["LazyKey"].ToString()))
             {
-                if (coverId == 0)
+                var coverId = 0;
+                if (int.TryParse(id, out coverId))
                 {
-                    //create
-                    var coverList = (List<Cover>)Session["CoverList"];
-                    var newId = coverList.Count + 1;
-                    coverList.Add(new Cover { Id = newId, Version = version, Template = template });
-                    lastEditedId = newId;
-                    return Json("Your new template is created. You will now be redirected to preview your created template." , JsonRequestBehavior.AllowGet);
+                    if (coverId == 0)
+                    {
+                        //create
+                        var coverList = (List<Cover>)Session["CoverList"];
+                        var newId = coverList.Count + 1;
+                        coverList.Add(new Cover { Id = newId, Version = version, Template = template });
+                        lastEditedId = newId;
+                        return Json("Your new template is created. You will now be redirected to preview your created template.", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        //update
+                        var cover = FetchCover(coverId);
+                        cover.Template = template;
+                        cover.Version = version;
+                        lastEditedId = coverId;
+                        return Json("Your new template is updated. You will now be redirected to preview your updated template.", JsonRequestBehavior.AllowGet);
+                    }
                 }
                 else
                 {
-                    //update
-                    var cover = FetchCover(coverId);
-                    cover.Template = template;
-                    cover.Version = version;
-                    lastEditedId = coverId;
-                    return Json("Your new template is updated. You will now be redirected to preview your updated template.", JsonRequestBehavior.AllowGet);
+                    return Json("Failed. Invalid ID passed.", JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                return Json("Failed. Invalid ID passed.", JsonRequestBehavior.AllowGet);
+                return Json("Failed. Not Authenticated.", JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpPost]
         public JsonResult GeneratePDF(string cover)
         {
-            try
+            if (Utility.IsAuthenticated(Session["LazyKey"] == null ? string.Empty : Session["LazyKey"].ToString()))
             {
-                var byteArray = Utility.GeneratePDF(HttpUtility.HtmlDecode(cover));
-                //return new FileContentResult(Convert.ToBase64String(byteArray), "application/pdf");
-                return Json(Convert.ToBase64String(byteArray), JsonRequestBehavior.AllowGet);
+                try
+                {
+                    var byteArray = Utility.GeneratePDF(HttpUtility.HtmlDecode(cover));
+                    //return new FileContentResult(Convert.ToBase64String(byteArray), "application/pdf");
+                    return Json(Convert.ToBase64String(byteArray), JsonRequestBehavior.AllowGet);
+                }
+                catch
+                {
+                    //return new FileContentResult(null, "application/pdf");
+                    return Json("Something went wrong.", JsonRequestBehavior.AllowGet);
+                }
             }
-            catch
+            else
             {
-                //return new FileContentResult(null, "application/pdf");
-                return Json("Something went wrong.", JsonRequestBehavior.AllowGet);
+                return Json("Failed. Not Authenticaed.", JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -109,6 +144,11 @@ namespace LazyWeb.Controllers
                 ViewBag.TemplateList = (List<Cover>)Session["CoverList"];
             }
             ViewBag.LastEditedId = lastEditedId;
+        }
+
+        private ActionResult HandleNoAuth()
+        {
+            return RedirectToAction("Index", "Error", new { error = Utility.NoAuthMessage });
         }
     }
 }

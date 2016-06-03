@@ -43,7 +43,20 @@
     });
 
     $('#saveCoverButton').click(function () {
-        savePdf($('#coverVersionSelect').val());
+        var fieldEmpty = false;
+        $('#coverFieldsPanelBody :input').each(function () {
+            if($(this).val() === '') {
+                fieldEmpty = true; 
+            }
+        });
+        if (fieldEmpty) {
+            if (confirm("Are you sure to download? Looks like some of the fields are empty. It would not look good in your cover letter !")) {
+                savePdf($('#coverVersionSelect').val());
+            }
+        }
+        else {
+            savePdf($('#coverVersionSelect').val());
+        }
     });
 });
 

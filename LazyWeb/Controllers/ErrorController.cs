@@ -9,8 +9,9 @@ namespace LazyWeb.Controllers
     public class ErrorController : Controller
     {
         // GET: Error
-        public ActionResult Index()
+        public ActionResult Index(string error)
         {
+            ViewBag.ErrorMessage = error;
             return View();
         }
     }
