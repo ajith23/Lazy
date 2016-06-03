@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SelectPdf;
+using System.Configuration;
 
 namespace LazyWeb
 {
@@ -12,7 +13,8 @@ namespace LazyWeb
         public static string pageSize = "Letter";
         public static string pageOrientation = "Portrait";
         public static int pageMargin = 25;
-        public static Stream GeneratePDF(string htmlString)
+        public static string downloadPath = @"C:\lazy-downloads\CoverSample.pdf";
+        public static byte[] GeneratePDF(string htmlString)
         {
             // instantiate a html to pdf converter object
             var converter = new HtmlToPdf();
@@ -22,11 +24,13 @@ namespace LazyWeb
             converter.Options.MarginTop = pageMargin;
             converter.Options.MarginLeft = pageMargin;
             converter.Options.MarginRight = pageMargin;
-
+            converter.Options.EmbedFonts = true;
+            converter.Options.InternalLinksEnabled = true;
+            converter.Options.ColorSpace = PdfColorSpace.RGB;
             var document = converter.ConvertHtmlString(htmlString);
-            document.Save(@"C:\AJ\Sample.pdf");
+            document.Save(downloadPath);
             document.Close();
-            return new FileStream(@"C:\AJ\Sample.pdf", FileMode.Open, FileAccess.Read);
+            return File.ReadAllBytes(downloadPath);
         }
         
         private PdfDocument GetDocument()

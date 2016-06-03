@@ -1,6 +1,7 @@
 ﻿using LazyWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -67,18 +68,18 @@ namespace LazyWeb.Controllers
         }
 
         [HttpPost]
-        public FileStreamResult GeneratePDF(string cover)
+        public JsonResult GeneratePDF(string cover)
         {
             try
             {
-                var pdfStream = Utility.GeneratePDF(HttpUtility.HtmlDecode(cover));
-                return new FileStreamResult(pdfStream, "application/pdf");
-                //return Json("PDF generated and saved.", JsonRequestBehavior.AllowGet);
+                var byteArray = Utility.GeneratePDF(HttpUtility.HtmlDecode(cover));
+                //return new FileContentResult(Convert.ToBase64String(byteArray), "application/pdf");
+                return Json(Convert.ToBase64String(byteArray), JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return new FileStreamResult(null, "application/pdf");
-                //return Json("Failed. Invalid ID passed.", JsonRequestBehavior.AllowGet);
+                //return new FileContentResult(null, "application/pdf");
+                return Json("Something went wrong.", JsonRequestBehavior.AllowGet);
             }
         }
 

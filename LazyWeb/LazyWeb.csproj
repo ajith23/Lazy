@@ -143,8 +143,8 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\custom\site.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="CustomReferences\Select.Pdf.dll" />
-    <Content Include="CustomReferences\Select.Pdf.xml" />
+    <Content Include="CustomReferences\Select.HtmlToPdf.dll" />
+    <Content Include="CustomReferences\Select.HtmlToPdf.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
