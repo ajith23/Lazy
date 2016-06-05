@@ -91,7 +91,7 @@ namespace LazyWeb.Controllers
             }
             else
             {
-                return Json("Failed. Not Authenticated.", JsonRequestBehavior.AllowGet);
+                return Json(Constants.NoAuthMessage, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -106,15 +106,14 @@ namespace LazyWeb.Controllers
                     //return new FileContentResult(Convert.ToBase64String(byteArray), "application/pdf");
                     return Json(Convert.ToBase64String(byteArray), JsonRequestBehavior.AllowGet);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    //return new FileContentResult(null, "application/pdf");
                     return Json("Something went wrong.", JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                return Json("Failed. Not Authenticaed.", JsonRequestBehavior.AllowGet);
+                return Json(Constants.NoAuthMessage, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -148,7 +147,7 @@ namespace LazyWeb.Controllers
 
         private ActionResult HandleNoAuth()
         {
-            return RedirectToAction("Index", "Error", new { error = Utility.NoAuthMessage });
+            return RedirectToAction("Index", "Error", new { error = Constants.NoAuthMessage });
         }
     }
 }

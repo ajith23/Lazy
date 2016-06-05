@@ -50,7 +50,7 @@
             }
         });
         if (fieldEmpty) {
-            if (confirm("Are you sure to download? Looks like some of the fields are empty. It would not look good in your cover letter !")) {
+            if (confirm("Are you sure to download? Looks like some of the fields are empty. It will not look good in your cover letter !")) {
                 savePdf($('#coverVersionSelect').val());
             }
         }
@@ -141,16 +141,15 @@ function getFormGroupHtml(fieldName, plainName)
 }
 
 function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
+    var pageURL = decodeURIComponent(window.location.search.substring(1)),
+        urlVariables = pageURL.split('&'),
+        parameterName;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
+    for (var i = 0; i < urlVariables.length; i++) {
+        parameterName = urlVariables[i].split('=');
 
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
+        if (parameterName[0] === sParam) {
+            return parameterName[1] === undefined ? true : parameterName[1];
         }
     }
 };

@@ -23,7 +23,7 @@ namespace LazyWeb.Controllers
 
         private ActionResult HandleNoAuth()
         {
-            return RedirectToAction("Index", "Error", new { error = Utility.NoAuthMessage});
+            return RedirectToAction("Index", "Error", new { error = Constants.NoAuthMessage});
         }
     }
 }
