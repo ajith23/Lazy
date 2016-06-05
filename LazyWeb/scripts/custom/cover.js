@@ -131,10 +131,18 @@ function updateFields(decodedData)
 function getFormGroupHtml(fieldName, plainName)
 {
     var htmlString = '';
-    
+    var type = 'text';
+    if (fieldName.indexOf('ta:') > -1) {
+        fieldName = fieldName.substring(3);
+        type = 'textarea';
+    }
     htmlString += '<div class="form-group">';
     htmlString += '  <label for="'+plainName+ 'TextBox">' + fieldName + '</label>';
-    htmlString += '  <input type="text" class="form-control coverField" id="' + plainName + 'TextBox">';
+    if (type === 'textarea')
+        htmlString += '  <textarea type="text" class="form-control coverField" id="' + plainName + 'TextBox"></textarea>';
+    else
+        htmlString += '  <input type="text" class="form-control coverField" id="' + plainName + 'TextBox">';
+
     htmlString += '</div>';
 
     return htmlString;

@@ -157,6 +157,7 @@
     <Content Include="scripts\custom\home.js" />
     <Content Include="scripts\custom\login.js" />
     <Content Include="scripts\custom\master.js" />
+    <Content Include="scripts\custom\settings.js" />
     <Content Include="scripts\jquery-1.12.4.min.js" />
     <Content Include="scripts\npm.js" />
     <Content Include="Web.config" />
@@ -171,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,6 +202,7 @@
     <Content Include="Views\Cover\Edit.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
