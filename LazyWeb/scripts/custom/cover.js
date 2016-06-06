@@ -75,7 +75,7 @@ function fetchCoverTemplates(id)
             $('#coverTemplateDiv').html(decodedData);
             updateFields(decodedData);
         },
-        error: function (xhr, err) {
+        error: function (xhr, error) {
             handleAjaxError(xhr, error);
         }
     });

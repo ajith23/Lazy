@@ -102,7 +102,8 @@ namespace LazyWeb.Controllers
             {
                 try
                 {
-                    var byteArray = Utility.GeneratePDF(HttpUtility.HtmlDecode(cover));
+                    var settings = GetPrintSettings();
+                    var byteArray = Utility.GeneratePDF(HttpUtility.HtmlDecode(cover), settings);
                     //return new FileContentResult(Convert.ToBase64String(byteArray), "application/pdf");
                     return Json(Convert.ToBase64String(byteArray), JsonRequestBehavior.AllowGet);
                 }
@@ -115,6 +116,15 @@ namespace LazyWeb.Controllers
             {
                 return Json(Constants.NoAuthMessage, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        private PrintSettings GetPrintSettings()
+        {
+            var settings = new PrintSettings();
+            settings.Size = Session["PageSize"] != null ? Session["PageSize"].ToString() : "Letter";
+            settings.Orientation = Session["PageOrientation"] != null ? Session["PageOrientation"].ToString() : "Portrait";
+            settings.Margin = Session["PageMargin"] != null ? Convert.ToInt32(Session["PageMargin"].ToString()) : 25;
+            return settings;
         }
 
         private Cover FetchCover(int id)
