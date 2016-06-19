@@ -136,10 +136,19 @@ function getFormGroupHtml(fieldName, plainName)
         fieldName = fieldName.substring(3);
         type = 'textarea';
     }
+    else if (fieldName.indexOf('date:') > -1) {
+        fieldName = fieldName.substring(5);
+        type = 'fillDate';
+    }
     htmlString += '<div class="form-group">';
     htmlString += '  <label for="'+plainName+ 'TextBox">' + fieldName + '</label>';
     if (type === 'textarea')
         htmlString += '  <textarea type="text" class="form-control coverField" id="' + plainName + 'TextBox"></textarea>';
+    if (type === 'fillDate') {
+        var today = new Date();
+        todayString = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear();
+        htmlString += '  <input type="text" class="form-control coverField" id="' + plainName + 'TextBox" value="' + todayString + '">';
+    }
     else
         htmlString += '  <input type="text" class="form-control coverField" id="' + plainName + 'TextBox">';
 
