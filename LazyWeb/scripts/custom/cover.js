@@ -136,10 +136,16 @@ function getFormGroupHtml(fieldName, plainName)
         fieldName = fieldName.substring(3);
         type = 'textarea';
     }
+    else if (fieldName.indexOf('date:') > -1) {
+        fieldName = fieldName.substring(5);
+        type = 'date';
+    }
     htmlString += '<div class="form-group">';
     htmlString += '  <label for="'+plainName+ 'TextBox">' + fieldName + '</label>';
     if (type === 'textarea')
         htmlString += '  <textarea type="text" class="form-control coverField" id="' + plainName + 'TextBox"></textarea>';
+    else if (type === 'date')
+        htmlString += '  <input type="text" class="form-control coverField" id="' + plainName + 'TextBox" value="' + getFormattedDate() + '">';
     else
         htmlString += '  <input type="text" class="form-control coverField" id="' + plainName + 'TextBox">';
 
@@ -201,4 +207,19 @@ function savePdf(id) {
             handleAjaxError(xhr, error);
         }
     });
+}
+
+function getFormattedDate() {
+    var monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+
+    var date = new Date();
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    return day + ' ' + monthNames[monthIndex] + ', ' + year;
 }

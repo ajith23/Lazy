@@ -48,8 +48,8 @@ namespace LazyWeb
         public static bool IsAuthenticated(string key)
         {
             var authenticated = false;
-            //string currentKey = File.ReadAllText(Constants.KeyPath);
-            //if (currentKey.Equals(key))
+            string currentKey = File.ReadAllText(Constants.KeyPath);
+            if (currentKey.Equals(key))
                 authenticated = true;
             return authenticated;
         }
