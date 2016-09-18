@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_Master.cshtml";
+    ViewBag.Title = "Application";
+}
+<script src="~/scripts/custom/application.js"></script>
+
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Apply Status</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Priority</th>
+                @foreach (var applicant in LazyWeb.Models.Application.DefaultApplicants)
+                {
+                    <td>@applicant</td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var application in ViewBag.ApplicationList)
+            {
+                <tr>
+                    <td>@application.Company</td>
+                    <td>@application.Priority</td>
+                    @foreach (var applicant in application.Applicants)
+                    {
+                        if (applicant.Trim() == string.Empty)
+                        {
+                            <td><input id="@application.Company" type="checkbox" checked disabled/></td>
+                        }
+                        else
+                        {
+                            if (ViewBag.UserAccess == applicant)
+                            {
+                                <td><input type="checkbox" /></td>
+                            }
+                            else
+                            {
+                                <td><input type="checkbox" disabled/></td>
+                            }
+                        }
+
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

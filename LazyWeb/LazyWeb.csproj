@@ -137,20 +137,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\custom\site.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Site.css" />
     <Content Include="CustomReferences\Select.HtmlToPdf.dll" />
     <Content Include="CustomReferences\Select.HtmlToPdf.xml" />
+    <Content Include="Data\ApplicationData.txt" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\custom\application.js" />
     <Content Include="scripts\custom\common.js" />
     <Content Include="scripts\custom\resume.js" />
     <Content Include="scripts\custom\cover.js" />
@@ -158,7 +164,11 @@
     <Content Include="scripts\custom\login.js" />
     <Content Include="scripts\custom\master.js" />
     <Content Include="scripts\custom\settings.js" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-1.12.4.min.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\npm.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -167,6 +177,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CoverController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -176,6 +187,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\Resume.cs" />
     <Compile Include="Models\Settings.cs" />
@@ -200,11 +212,18 @@
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="CustomReferences\Select.Html.dep" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\lazy.pubxml" />
     <Content Include="Views\Cover\Edit.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

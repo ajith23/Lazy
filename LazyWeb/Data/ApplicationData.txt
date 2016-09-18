@@ -1,0 +1,52 @@
+﻿Adobe,1,,A
+Amazon,1,R,A
+AMD,1,,
+American Express,1,R,A
+Apache,1,,
+Apple,1,R,A
+Ask.com,1,R,
+Audi,1,,
+Bank of America,1,,A
+Bentley,1,,
+Boeing,1,,
+Canon,1,,
+Cisco Systems,1,,
+Disney,1,,
+Dropbox,1,R,A
+Duckduckgo,1,,
+EA Sports,1,,
+eBay inc.,1,,
+EMC,1,,
+Epic,1,,
+Facebook,1,R,A
+Fitbit,1,R,A
+Garmin,1,,
+Google,1,R,A
+Hewlett Packard,1,,
+Honeywell,1,,
+IBM,1,,
+Intel,1,R,
+LinkedIn,1,R,A
+Mastercard,1,,
+Mathworks,1,R,A
+McAfee,1,,
+Microsoft,1,R,A
+MongoDB,1,,
+Oracle,1,R,
+PayPal,1,R,A
+Qualcomm,1,R,A
+Red Hat,1,R,
+Samsung,1,,
+Sandisk,1,,
+SAP,1,,
+Teradata,1,,A
+Tesla,1,,A
+Twitter,1,R,A
+Uber,1,,
+Ubuntu,1,,
+VMware,1,,
+Volvo Cars,1,,
+Wolfram|Alpha,1,R,A
+Xerox,1,R,A
+Yahoo,1,R,A
+Yelp,1,R,A

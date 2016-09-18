@@ -33,7 +33,7 @@ namespace LazyWeb
             document.Close();
             return File.ReadAllBytes(Constants.DownloadPath);
         }
-        
+
         private PdfDocument GetDocument()
         {
             PdfDocument document = new PdfDocument();
@@ -48,10 +48,19 @@ namespace LazyWeb
         public static bool IsAuthenticated(string key)
         {
             var authenticated = false;
-            string currentKey = File.ReadAllText(Constants.KeyPath);
-            if (currentKey.Equals(key))
+            //string currentKey = File.ReadAllText(Constants.KeyPath);
+            //if (currentKey.Equals(key))
                 authenticated = true;
             return authenticated;
+        }
+
+        internal static string GetUserAccess(string key)
+        {
+            var user = "";
+            var temp = key.Split('-');
+            if (temp.Length > 1)
+                user = temp[1];
+            return user;
         }
     }
 }
