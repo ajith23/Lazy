@@ -56,7 +56,7 @@ namespace LazyWeb
 
         internal static string GetUserAccess(string key)
         {
-            var user = "";
+            var user = "A";
             var temp = key.Split('-');
             if (temp.Length > 1)
                 user = temp[1];

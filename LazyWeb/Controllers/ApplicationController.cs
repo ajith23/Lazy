@@ -24,6 +24,18 @@ namespace LazyWeb.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult UpdateApplicationStatus(string companyName, bool applied)
+        {
+            if (Utility.IsAuthenticated(Session["LazyKey"] == null ? string.Empty : Session["LazyKey"].ToString()))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
         private void UpdateViewBag()
         {
             ViewBag.UserAccess = Utility.GetUserAccess(Session["LazyKey"] == null ? string.Empty : Session["LazyKey"].ToString());
