@@ -36,7 +36,7 @@
     $('#saveEditCoverButton').click(function () {
         //validate form
         if ($('#currentVersionNameText').val().trim() === '') {
-            alert('Ener a template version name. This is required so that you can identify your template using this name. Be very specific.');
+            alert('Enter a template version name. This is required so that you can identify your template using this name. Be very specific.');
             return;
         }
         saveEditCoverTemplate($('#coverVersionSelect').val());
